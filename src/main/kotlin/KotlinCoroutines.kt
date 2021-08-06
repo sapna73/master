@@ -1,20 +1,20 @@
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.concurrent.thread
 
-fun main(){
+fun main() = runBlocking{
 
     //Executes in main thread
     println("Main Program Starts: ${Thread.currentThread().name}")
 
-    GlobalScope.launch {
+    val job : Job =     launch {
         println("Fake work starts: ${Thread.currentThread().name}")
-        Thread.sleep(1000)
+        delay(1000) //coroutine is suspended but Thread: main is free (not blocked)
         //creates a background thread(worker thread)
         println("Fake work finished: ${Thread.currentThread().name}")
     }
 
-    Thread.sleep(2000)
+//    delay(2000)                      // Main thread: wait for coroutine to finish(practically not a right way to do)
+    job.join()
     println("Main Program end: ${Thread.currentThread().name}")
 
 }
