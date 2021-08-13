@@ -11,6 +11,11 @@ fun main() = runBlocking{
         delay(1000) //coroutine is suspended but Thread: main is free (not blocked)
         //creates a background thread(worker thread)
         println("Fake work finished: ${Thread.currentThread().name}")
+        println("Hello Kotlin world")
+
+        var mrx = SimpleClassObject();
+        mrx.name = "Girish";
+        println("Name is : " + mrx.name)
     }
 
 //    delay(2000)                      // Main thread: wait for coroutine to finish(practically not a right way to do)
